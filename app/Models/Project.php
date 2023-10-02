@@ -48,10 +48,10 @@ class Project extends Model
     }
 
     /**
-     * Defining the One To Many function for projects' resources.
+     * Defining the One To Many function for projects' medias.
      */
-    public function resources(): BelongsToMany
+    public function medias(): BelongsToMany
     {
-        return $this->belongsToMany(Resource::class);
+        return $this->belongsToMany(Media::class);
     }
 }

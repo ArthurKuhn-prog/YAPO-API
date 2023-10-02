@@ -24,7 +24,7 @@ class Media extends Model
      */
     protected $fillable = [
         'title',
-        'type',
+        'content',
     ];
 
     /**
