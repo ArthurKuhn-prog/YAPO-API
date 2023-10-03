@@ -12,13 +12,13 @@ class Category extends Model
     use HasUuids;
 
     /**
-     * This is the Category model. Used for storing and managing the categories for both projects and articles.
+     * This is the Category model. Used for storing and managing the categories for both projects and Posts.
      * 
      * Categories are characterized by:
      * - an id (Uuids for better storage and recognition)
      * - title (STRING. mostly used in the front-end for display. Back-end managing uses the id to refer to a category)
      * - project_id (ARRAY. All of the category's attached projects [Many To Many])
-     * - article_id (ARRAY, same, for the articles [Many To Many])
+     * - Post_id (ARRAY, same, for the Posts [Many To Many])
      * - updated_at
      */
 
@@ -35,10 +35,10 @@ class Category extends Model
     }
 
     /**
-     * Defining the One To Many function for category's articles.
+     * Defining the One To Many function for category's Posts.
      */
-    public function articles(): BelongsToMany
+    public function posts(): BelongsToMany
     {
-        return $this->belongsToMany(Article::class);
+        return $this->belongsToMany(Post::class);
     }
 }

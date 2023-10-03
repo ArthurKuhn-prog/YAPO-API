@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 
 class Project extends Model
 {
@@ -18,7 +19,7 @@ class Project extends Model
      * Projects are characterized by:
      * - an id (Uuids for better storage and recognition)
      * - title (STRING. mostly used in the front-end for display. Back-end managing uses the id to refer to a project)
-     * - description (LONG STRING. optional, will be used as a description meta tag)
+     * - description (JSON. optional, will be used as a description meta tag)
      * - thumbnail (OBJECT {url, alt} separated from the content for more efficient display later on, front-end wise)
      * - categories the project belongs to (ARRAY. optional, [Many To Many])
      * - content (OBJECT. A JSON object)
@@ -30,13 +31,21 @@ class Project extends Model
         'title',
         'description',
         'content',
+        'thumbnail',
     ];
 
-    /**
+    /*
      * The thumbnail is, by default, a false boolean for faster display
      */
     protected $attributes = [
-        'thumbnail' => false,
+        'description' => null,
+        'thumbnail' => null,
+        'content' => null,
+    ];
+
+    protected $casts = [
+        'thumbnail' => AsArrayObject::class,
+        'content' => AsArrayObject::class
     ];
 
     /**
